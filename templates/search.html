@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if category %}
+        {{category.description|truncatewords:155}}
+    {% else %}
+        Welcome to MJ shopping where you can buy different items
+    {% endif %}
+{% endblock %}
+{% block title %}
+    Search
+{% endblock %}
+{% block content %}
+    <div>
+        <p class="text-center my-search-text">Ypu have searched for <b>"{{query}}"</b>.</p>
+    </div>
+{% endblock %}

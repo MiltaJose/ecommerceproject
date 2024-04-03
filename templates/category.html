@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if category %}
+        {{category.description|truncatewords:155}}
+    {% else %}
+        Welcome to MJ shopping where you can buy different items
+    {% endif %}
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{category.name}}-MJ Shop
+    {% else %}
+        see our new collections-MJ Shop
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {% if category %}
+        <div>
+             <div class="row my-row-class">
+                 <div class="mx-auto">
+                <p>
+                    <a href="{% url 'ecommerceapp:allProdCat' %}">Our product collection</a>
+                </p>
+                 </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="mx-auto">
+        {% if category %}
+            <img class="my-image" src="{{category.image.url}}" alt="{{category.name}}">
+    </div>
+    <br>
+    <div>
+        <h1 class="text-center my-title">{{category.name}}</h1>
+        <p class="text-justify">{{category.description}}</p>
+    </div>
+        {% else %}
+        <div>
+           <img class="my-image-padding" src="{% static 'img/banner.png' %}" alt="our products" width="1330px">
+        </div><br>
+    <div>
+        <h1 class="text-center my-title">Our products collection</h1>
+        <p class="text-justify">dummy content should add here</p>
+    </div>
+        {% endif %}
+    <div>
+        <div>
+            {% for product in products %}
+            <div class="container">
+                <div class="row">
+                    <a href="{{product.get_url}}"><img src="{{product.image.url}}" alt="{{product.name}}" width="100px"></a>
+                </div>
+                <div>
+                    <h4>{{product.name}}</h4>
+                    <p>${{product.price}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
